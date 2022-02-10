@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:sptofyuiclone/home.dart';
+import 'package:sptofyuiclone/radiopage.dart';
+import 'package:sptofyuiclone/search.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +20,12 @@ class MyApp extends StatelessWidget {
       title: 'Home',
       theme: ThemeData(
           primarySwatch: Colors.green,
+          // scaffoldBackgroundColor: Colors.black,
           brightness: Brightness.dark,
-          textTheme: GoogleFonts.latoTextTheme(
+          textTheme: GoogleFonts.signikaTextTheme(
               //Theme.of(context).textTheme,
               ThemeData.dark().textTheme)),
-      home: const MyHomePage(title: 'Home'),
+      home: const MyHomePage(title: 'Good Evening'),
     );
   }
 }
@@ -35,53 +40,70 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // int _counter = 0;
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOption = <Widget>[
+    Home(),
+   SearchPage(),
+    radio(),
+    Text("Playing Now"),
+  ];
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text(widget.title)),
-        backgroundColor: HexColor("#191919"),
-      ),
-      body: Center(
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: const EdgeInsets.all(5),
-              child: Column(
-                children: [
-                  const Text(
-                    "Native American Heritage Month",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        extendBody: true,
+        backgroundColor: Colors.transparent,
+        bottomNavigationBar: Theme(
+          data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+          child: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.transparent, Colors.black],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter)),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              items: <BottomNavigationBarItem>[
+                const BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.home),
+                  label: 'Home',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.search),
+                  label: 'Search',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    "assets/icons/library.png",
+                    height: 24,
+                    width: 24,
+                    color: Colors.white,
+                    fit: BoxFit.cover,
                   ),
-                  const SizedBox(height: 5),
-                  Text(
-                      "Celebrate with collection of music and lyrics by indigeneous artists",
-                      style: TextStyle(
-                          fontSize: 15, color: Colors.white.withOpacity(0.8)),
-                      textAlign: TextAlign.center),
-                ],
-              ),
-            ),
-            ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                Container(
-                  height: 80,
-                  width: 80,
-                  child: Column(children: [
-                    Image(image: image)
-                  ],),
-                )
+                  label: 'Library',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    "assets/icons/premium.png",
+                    height: 24,
+                    width: 24,
+                    color: Colors.white,
+                    fit: BoxFit.cover,
+                  ),
+                  label: 'Premium',
+                ),
               ],
-            )
-          ],
+              selectedItemColor: Colors.white,
+              currentIndex: _selectedIndex,
+              onTap: _onItemTapped,
+            ),
+          ),
         ),
-      ),
-    );
+        body: _widgetOption.elementAt(_selectedIndex));
   }
 }
