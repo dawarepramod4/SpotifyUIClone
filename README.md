@@ -1,4 +1,4 @@
-# sptofyuiclone
+# spotifyuiclone
 
 Improving Skills by Creating the Spotify UI clone using Flutter
 This project is just a practice of Flutter.
