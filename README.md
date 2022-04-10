@@ -13,7 +13,7 @@ This is the home screen of my app:
 
 ![plot](https://github.com/dawarepramod4/sptofyuiclone/blob/master/assets/Screens/Home%20Screen.png)
 
-##Search Screem
+## Search Screem
 This is the Copy of the spotify Search UI
 I learnt how to use the custom cards and stack widget while buldiing this screen
 
