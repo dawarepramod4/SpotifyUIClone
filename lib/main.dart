@@ -43,8 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOption = <Widget>[
     Home(),
-   SearchPage(),
-    radio(),
+    SearchPage(),
+    Library(),
     Text("Playing Now"),
   ];
   void _onItemTapped(int index) {
